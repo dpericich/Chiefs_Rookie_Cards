@@ -1,17 +1,17 @@
-import React from 'react'
+import React, {Component} from 'react'
 
-function Card(props){
+export class Card extends Component{
+    render() {
     return (
         <div style={cardStyle}>
-            <img src={props.card} alt="chiefs" />
+            <img src={this.props.pics[this.props.counter]} alt="chiefs" />
         </div>
     )
 }
+}
 
 const cardStyle = {
-    height: "100%",
-    textAlign: "center",
-    paddingTop: "5%",
+    textAlign: 'center',
 }
 
 export default Card
