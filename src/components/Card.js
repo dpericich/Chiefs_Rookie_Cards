@@ -4,7 +4,7 @@ export class Card extends Component{
     render() {
     return (
         <div style={cardStyle}>
-            <img src={this.props.pics[this.props.counter]} alt="chiefs" />
+            <img src={this.props.imgSrc} alt="chiefs" />
         </div>
     )
 }

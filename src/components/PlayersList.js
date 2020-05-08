@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
-import Players from './Players'
+import Player from './Player'
 
 class PlayersList extends Component {
     render() {
             return this.props.players.map((player) => (
-                <Players player={player} updatePlayer={this.props.updatePlayer}/>
+                <Player key={player.id} player={player} active={player.id === this.props.activePlayerID}
+                activatePlayer={this.props.activatePlayer}/>
             ));
     }
 }

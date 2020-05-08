@@ -7,78 +7,69 @@ class App extends Component{
   constructor(props) {
     super(props);
 
-    const img0 = require('./static/cover_card.png');
-    const img1 = require('./static/edwards.png');
-    const img2 = require('./static/gay.png');
-    const img3 = require('./static/niang.png')
-    const img4 = require('./static/sneed.png')
-    const img5 = require('./static/danna.png')
-    const img6 = require('./static/keyes.png')
-
     this.state = {
       players: [
         {
           id: 1,
           name: 'Clyde Edwards-Helaire 25',
-          active: false,
+          img: require('./static/edwards.png'), 
         },
         {
           id: 2,
           name: 'Willie Gay Jr. 50',
-          active: false,
+          img: require('./static/gay.png'),
         },
         {
           id:3,
           name: 'Lucas Niang 67',
-          active: false,
+          img: require('./static/niang.png'),
         },
         {
           id:4,
           name: "L'Jarius Sneed 38",
-          active: false,
+          img: require('./static/sneed.png')
         },
         {
           id: 5,
           name: 'Mike Danna 51',
-          active: false,
+          img: require('./static/danna.png'),
         },
         {
           id:6,
           name: 'BoPete Keyes 29',
-          active: false,
+          img: require('./static/keyes.png')
         }
       ],
-        index: 0,
-        imgList: [img0, img1, img2, img3, img4, img5, img6],
-        active: [null, false, false, false, false, false, false]
+      activePlayerID: null
     }
   }
 
-  //Toggle color to show that the button is selected
-  updatePlayer = (id) =>{
-    this.setState({players: this.state.players.map(player => {
-      if(player.id === id) {
-        player.active = !player.active;
-    }
-      return player;
-    }) }); 
+  //Store the selected player's id
+  activatePlayer(id) {
     this.setState({
-      index: id
-    });
+      activePlayerID: id
+    });    
+  }
+
+  getActivePlayer() {
+    return this.state.players.filter(p => p.id===this.state.activePlayerID)[0]
   }
   
   render() {
+    const activePlayer = this.getActivePlayer()
+    const cardImgSrc = activePlayer?.img || require('./static/cover_card.png')
     return (
       <div style={cardApp}>
         <div className="row">
           <div className="column">
-            <Card counter={this.state.index} pics={this.state.imgList}/>
+            <Card  imgSrc={cardImgSrc}/>
           </div>
           <div className="column 2">
             <div style={listWrapperStyle}>
               <h2>2020 Kansas City Chiefs Draft Picks</h2>
               <div style={listStyle}>
-               <PlayersList players={this.state.players} updatePlayer={this.updatePlayer}/> 
+               <PlayersList players={this.state.players} activePlayerID={this.state.activePlayerID}
+               activatePlayer={this.activatePlayer.bind(this)}/> 
               </div>
             </div>
           </div>
@@ -97,7 +88,6 @@ const listWrapperStyle = {
   background: '#FFB81C',
   textAlign: 'center',
   borderRadius: '10px',
-  marginTop: '25px',
 }
 
 

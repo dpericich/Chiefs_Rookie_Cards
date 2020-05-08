@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 
-export class  Players extends Component {
+export class  Player extends Component {
     buttonStyle = () => {
         return{
-            backgroundColor: this.props.player.active ? 'black': '#E31837',
-            color: this.props.player.active ? 'white' : 'black',
+            backgroundColor: this.props.active ? 'black': '#E31837',
+            color: this.props.active ? 'white' : 'black',
             border: "1px solid black",
             textAlign: "center",
             width: "100%",
@@ -17,7 +17,7 @@ export class  Players extends Component {
     render() {
         const {name, id} = this.props.player;
         return (
-            <button style={this.buttonStyle()} onClick={this.props.updatePlayer.bind(this, id)}
+            <button style={this.buttonStyle()} onClick={this.props.activatePlayer.bind(this, id)}
             >
             {name}
             </button>
@@ -26,5 +26,5 @@ export class  Players extends Component {
 }
 
 
-export default Players
+export default Player
 
